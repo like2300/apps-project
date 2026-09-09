@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import '../configuration/theme.dart';
 import 'auth_sheets.dart';
 
@@ -36,7 +35,7 @@ class StartPage extends StatelessWidget {
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
                               colors: [
-                                AppTheme.primaryGreen.withOpacity(0.2),
+                                AppTheme.primaryGreen.withValues(alpha: 0.2),
                                 AppTheme.backgroundColor,
                               ],
                             ),
@@ -54,8 +53,8 @@ class StartPage extends StatelessWidget {
                           begin: Alignment.bottomCenter,
                           end: Alignment.topCenter,
                           colors: [
-                            AppTheme.primaryGreen.withOpacity(0.85),
-                            Colors.black.withOpacity(0.15),
+                            AppTheme.primaryGreen.withValues(alpha: 0.85),
+                            Colors.black.withValues(alpha: 0.15),
                             Colors.transparent,
                           ],
                         ),
@@ -72,7 +71,7 @@ class StartPage extends StatelessWidget {
                       clipper: TopArcClipper(),
                       child: Container(
                         height: 60,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: AppTheme.backgroundColor,
                         ),
                       ),
@@ -107,16 +106,9 @@ class StartPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 32),
 
-                  // Bouton Se Connecter
+                  // Bouton Se Connecter -> Sheet de connexion
                   ElevatedButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        builder: (_) => const LoginSheet(),
-                      );
-                    },
+                    onPressed: () => AuthSheets.showLogin(context),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppTheme.primaryGreen,
                       shape: RoundedRectangleBorder(
@@ -132,16 +124,9 @@ class StartPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 14),
 
-                  // Bouton S'inscrire
+                  // Bouton S'inscrire -> Sheet d'inscription
                   OutlinedButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        builder: (_) => const RegisterSheet(),
-                      );
-                    },
+                    onPressed: () => AuthSheets.showRegister(context),
                     style: AppTheme.outlinedButtonStyle,
                     child: const Text(
                       'S\'inscrire',

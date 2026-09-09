@@ -60,7 +60,7 @@ class _VerificationPageState extends State<VerificationPage> {
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: Colors.black.withValues(alpha: 0.05),
                 blurRadius: 10,
               ),
             ],
@@ -71,7 +71,7 @@ class _VerificationPageState extends State<VerificationPage> {
               color: AppTheme.textPrimary,
               size: 18,
             ),
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => context.pop(),
           ),
         ),
         title: const Text(
@@ -102,7 +102,7 @@ class _VerificationPageState extends State<VerificationPage> {
                       width: 72,
                       height: 72,
                       decoration: BoxDecoration(
-                        color: AppTheme.primaryGreen.withOpacity(0.12),
+                        color: AppTheme.primaryGreen.withValues(alpha: 0.12),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(
@@ -152,7 +152,7 @@ class _VerificationPageState extends State<VerificationPage> {
                               ),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.03),
+                                  color: Colors.black.withValues(alpha: 0.03),
                                   blurRadius: 8,
                                   offset: const Offset(0, 2),
                                 ),

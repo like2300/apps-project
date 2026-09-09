@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../configuration/theme.dart';
 
 class CrossLabelField extends StatelessWidget {
   final String label;
   final String hint;
-  final IconData icon;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
 
@@ -12,27 +12,19 @@ class CrossLabelField extends StatelessWidget {
     super.key,
     required this.label,
     required this.hint,
-    required this.icon,
     this.controller,
     this.keyboardType,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: AppTheme.labelStyle),
-        const SizedBox(height: 6),
-        TextField(
-          controller: controller,
-          keyboardType: keyboardType,
-          decoration: AppTheme.inputDecoration(
-            hintText: hint,
-            suffixIcon: icon,
-          ),
-        ),
-      ],
+    return TextField(
+      controller: controller,
+      keyboardType: keyboardType,
+      decoration: AppTheme.inputDecoration(
+        labelText: label,
+        hintText: '',
+      ),
     );
   }
 }
@@ -49,7 +41,7 @@ class ForgotPasswordPage extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: AppTheme.textPrimary),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
         ),
         title: const Text(
           'Réinitialisation',
@@ -63,58 +55,57 @@ class ForgotPasswordPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 12),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 480),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 12),
 
-            // Titre et Description
-            Text(
-              'Mot de passe oublié ?',
-              style: AppTheme.titleStyle,
-            ),
-            const SizedBox(height: 6),
-            Text(
-              'Renseignez vos informations pour recevoir votre code ou lien de réinitialisation.',
-              style: AppTheme.subtitleStyle.copyWith(fontSize: 14),
-            ),
-            const SizedBox(height: 32),
-
-            // Formulaire
-            const CrossLabelField(
-              label: 'N° assuré(e)',
-              hint: 'Entrez votre numéro d\'assuré(e)',
-              icon: Icons.person_outline,
-            ),
-            const SizedBox(height: 16),
-
-            const CrossLabelField(
-              label: 'N° téléphone',
-              hint: 'Entrez votre numéro de téléphone',
-              icon: Icons.phone_outlined,
-              keyboardType: TextInputType.phone,
-            ),
-            const SizedBox(height: 32),
-
-            // Bouton de validation
-            SizedBox(
-              width: double.infinity,
-              height: 52,
-              child: ElevatedButton(
-                onPressed: () {
-                  // Logique d'envoi du code / lien
-                },
-                style: AppTheme.primaryButtonStyle,
-                child: const Text(
-                  'Envoyer',
-                  style: AppTheme.buttonTextStyle,
+                const Text(
+                  'Mot de passe oublié ?',
+                  style: AppTheme.titleStyle,
                 ),
-              ),
+                const SizedBox(height: 6),
+                Text(
+                  'Renseignez vos informations pour recevoir votre code ou lien de réinitialisation.',
+                  style: AppTheme.subtitleStyle.copyWith(fontSize: 14),
+                ),
+                const SizedBox(height: 32),
+
+                const CrossLabelField(
+                  label: 'N° assuré(e)',
+                  hint: '',
+                ),
+                const SizedBox(height: 18),
+
+                const CrossLabelField(
+                  label: 'N° téléphone',
+                  hint: '',
+                  keyboardType: TextInputType.phone,
+                ),
+                const SizedBox(height: 32),
+
+                SizedBox(
+                  width: double.infinity,
+                  height: 52,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Logique d'envoi du code / lien
+                    },
+                    style: AppTheme.primaryButtonStyle,
+                    child: const Text(
+                      'Envoyer',
+                      style: AppTheme.buttonTextStyle,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
   }
 }
-
